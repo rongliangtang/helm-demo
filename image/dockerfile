@@ -1,0 +1,26 @@
+# 使用 OpenJDK 8 的 Alpine 作为构建阶段的基础镜像
+FROM openjdk:8-jdk-alpine AS builder
+
+# 创建工作目录 /src
+WORKDIR /src
+
+# 将当前目录下的所有文件复制到容器的 /src 目录中
+COPY . .
+
+# 编译 Java 源代码
+RUN javac HelloKubernetes.java
+
+# 使用 distroless 作为运行阶段的基础镜像，以提高安全性和减小镜像大小
+FROM gcr.io/distroless/java-debian10
+
+# 设置工作目录为根目录
+WORKDIR /
+
+# 从构建阶段复制所有编译好的字节码文件到运行阶段镜像中
+COPY --from=builder /src/ /app/
+
+# 设置类路径，并运行应用程序
+ENTRYPOINT ["java", "-cp", "/app", "HelloKubernetes"]
+
+# 暴露应用程序监听的端口
+EXPOSE 3000
