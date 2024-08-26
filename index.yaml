@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  hello-helm:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-08-26T10:14:14.36211498Z"
+    description: A Helm chart for Kubernetes
+    digest: a9d6ea36971d8ce4ae41887ff7917a88fdce9180d62a671c36c2fe917903e092
+    name: hello-helm
+    type: application
+    urls:
+    - https://github.com/rongliangtang/helm-demo/releases/download/hello-helm-0.1.0/hello-helm-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-08-26T10:14:14.36212069Z"
